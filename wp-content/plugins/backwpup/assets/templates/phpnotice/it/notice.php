@@ -23,14 +23,14 @@ if ( ! $plugin_name || ! $more_info_url ) {
 <div class="notice notice-warning is-dismissible">
 	<p>
 		Per migliorare ulteriormente lo sviluppo di <?= $plugin_name ?>, ti chiediamo il consenso di prelevare da questo
-		sito alcune informazioni come la version PHP e la version WordPress utilizzate.
+		sito alcune informazioni come la versione PHP e la versione WordPress utilizzate.
 		<?php if ($anonymize) : ?>
 			<strong>Nessuna informazione personale sar&agrave; trasmessa!</strong>
 		<?php endif ?>
 
 	</p>
 	<p class="notice-links">
-		<?= $buttons->agree_button() ?>
-		<?= $buttons->more_info_button( $more_info_url ) ?>
+		<?php echo $buttons->agree_button() ?>
+		<?php echo $buttons->more_info_button( $more_info_url ) ?>
 	</p>
 </div>

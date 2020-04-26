@@ -1,4 +1,7 @@
 <?php
+
+use \Inpsyde\BackWPupShared\File\MimeTypeExtractor;
+
 /**
  *
  */
@@ -42,7 +45,7 @@ class BackWPup_Destination_SugarSync extends BackWPup_Destinations {
             <tr>
                 <th scope="row"><label for="idauthbutton"><?php esc_html_e( 'Authentication', 'backwpup' ); ?></label></th>
                 <td>
-					<span style="color:green;"><?php esc_html_e( 'Authenticated!', 'backwpup' ); ?></span>
+					<span class="bwu-message-success"><?php esc_html_e( 'Authenticated!', 'backwpup' ); ?></span>
 					<input type="submit" id="idauthbutton" name="authbutton" class="button-primary" value="<?php esc_html_e( 'Delete Sugarsync authentication!', 'backwpup' ); ?>" />
                 </td>
             </tr>
@@ -61,10 +64,10 @@ class BackWPup_Destination_SugarSync extends BackWPup_Destinations {
 					$user        = $sugarsync->user();
 					$syncfolders = $sugarsync->get( $user->syncfolders );
 					if ( ! is_object( $syncfolders ) )
-						echo '<span style="color:red;">' . __( 'No Syncfolders found!', 'backwpup' ) . '</span>';
+						echo '<span class="bwu-message-error">' . __( 'No Syncfolders found!', 'backwpup' ) . '</span>';
 				}
 				catch ( Exception $e ) {
-					echo '<span style="color:red;">' . $e->getMessage() . '</span>';
+					echo '<span class="bwu-message-error">' . $e->getMessage() . '</span>';
 				}
 				if ( isset( $syncfolders ) && is_object( $syncfolders ) ) {
 					echo '<select name="sugarroot" id="sugarroot">';
@@ -185,8 +188,9 @@ class BackWPup_Destination_SugarSync extends BackWPup_Destinations {
 	/**
 	 * @param $jobid
 	 * @param $get_file
+	 * @param $local_file_path
 	 */
-	public function file_download( $jobid, $get_file ) {
+	public function file_download( $jobid, $get_file, $local_file_path = null ) {
 
 		try {
 			$sugarsync = new BackWPup_Destination_SugarSync_API( BackWPup_Option::get( $jobid, 'sugarrefreshtoken' ) );
@@ -199,7 +203,7 @@ class BackWPup_Destination_SugarSync extends BackWPup_Destinations {
 			@set_time_limit( 300 );
 			nocache_headers();
 			header( 'Content-Description: File Transfer' );
-			header( 'Content-Type: ' . BackWPup_Job::get_mime_type( (string) $response->displayName ) );
+			header( 'Content-Type: ' . MimeTypeExtractor::fromFilePath( (string) $response->displayName ) );
 			header( 'Content-Disposition: attachment; filename="' . (string) $response->displayName . '"' );
 			header( 'Content-Transfer-Encoding: binary' );
 			header( 'Content-Length: ' . (int) $response->size );
@@ -212,12 +216,14 @@ class BackWPup_Destination_SugarSync extends BackWPup_Destinations {
 	}
 
 	/**
-	 * @param $jobdest
-	 * @return mixed
+	 * @inheritdoc
 	 */
 	public function file_get_list( $jobdest ) {
 
-		return get_site_transient( 'backwpup_' . strtolower( $jobdest ) );
+		$list = (array) get_site_transient( 'backwpup_' . strtolower( $jobdest ) );
+		$list = array_filter( $list );
+
+		return $list;
 	}
 
 	/**
@@ -273,7 +279,7 @@ class BackWPup_Destination_SugarSync extends BackWPup_Destinations {
 			if ( is_object( $getfiles ) ) {
 				foreach ( $getfiles->file as $getfile ) {
 					$getfile->displayName = utf8_decode( (string)$getfile->displayName );
-					if ( $job_object->is_backup_archive( $getfile->displayName ) && $job_object->owns_backup_archive( $getfile->displayName ) == true )
+					if ( $this->is_backup_archive( $getfile->displayName ) && $this->is_backup_owned_by_job( $getfile->displayName, $job_object->job['jobid'] ) == true )
 						$backupfilelist[ strtotime( (string)$getfile->lastModified ) ] = (string)$getfile->ref;
 					$files[ $filecounter ][ 'folder' ]      = 'https://' . (string)$user->nickname . '.sugarsync.com/' . $dir;
 					$files[ $filecounter ][ 'file' ]        = (string)$getfile->ref;
@@ -849,7 +855,7 @@ class BackWPup_Destination_SugarSync_API {
 			$name = basename( $file );
 		}
 
-		$content_type = BackWPup_Job::get_mime_type( $file );
+		$content_type = MimeTypeExtractor::fromFilePath( $file );
 
 		$xmlrequest = '<?xml version="1.0" encoding="UTF-8"?>';
 		$xmlrequest .= '<file>';

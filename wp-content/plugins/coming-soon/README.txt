@@ -1,10 +1,10 @@
 === Plugin Name ===
-Contributors: seedprod
+Contributors: seedprod, smub
 Donate link: http://www.seedprod.com
-Tags: maintenance mode, coming soon page, coming soon, under construction, launch page, launch, maintenance, construction, offline, unavailable, under construction page, landing page
+Tags: maintenance mode, coming soon page, coming soon, under construction, landing page, launch, maintenance, construction, offline, unavailable, under construction page, launch page
 Requires at least: 3.5.1
-Tested up to: 4.9.4
-Stable tag: 5.0.18
+Tested up to: 5.4
+Stable tag: 5.1.0
 Text Domain: coming-soon
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -13,11 +13,10 @@ The #1 Coming Soon Page, Under Construction & Maintenance Mode plugin for WordPr
 
 == Description ==
 
-Create a simple Coming Soon Page or Maintenance Mode Page. Work on your site in private while visitors see a "Coming Soon" or "Maintenance Mode" page.
+Create a simple Coming Soon Page, Under Construction or Maintenance Mode Page. Work on your site in private while visitors see a "Coming Soon" or "Maintenance Mode" page.
 
-*   [Upgrade to the Coming Soon Pro Version Now! &raquo;](http://www.seedprod.com?utm_source=wordpress.org&utm_medium=link&utm_campaign=coming-soon-pro-from-wordpress.org "Coming Soon Page Pro Version")
+*   [Upgrade to Coming Soon Page Pro to Unlock All the Features	! &raquo;](http://www.seedprod.com?utm_source=wordpress.org&utm_medium=link&utm_campaign=coming-soon-pro-from-wordpress.org "Coming Soon Page Pro Version")
 *   [View a Coming Soon Page Live Demo &raquo;](http://demo.seedprod.com/coming-soon-pro/ "Coming Soon Page Demo")
-*   [Read Reviews &raquo;](https://www.seedprod.com/testimonials/ "Ultimate Coming Soon Page WordPress Plugin")
 
 ### Benefits, Features and Options:
 
@@ -35,7 +34,7 @@ Create a simple Coming Soon Page or Maintenance Mode Page. Work on your site in 
 
 *	Works with any WordPress theme
 *	Visible only to non logged in users
-*	Secret link for your clients to view the upcoming website without logging in
+*	Secret bypass link for your clients to view the upcoming website without logging in
 *	Search Engine Optimized with customizable meta tags
 *	Mobile Ready responsive design and layout
 *	Maintenance Mode with Automatic Screenshot
@@ -116,6 +115,37 @@ This is always a caching issue. Go to the caching plugin's setting page and clea
 4. Design Page
 
 == Changelog ==
+= 5.1.0 =
+* Added - Suggest a Feature 
+* Added - Quicklinks to Support
+* Added - RafflePress support and recommendation
+
+= 5.0.26 =
+* Added - Giveaway Link to Submenu
+
+= 5.0.25 =
+* Fixed - Documentation Link
+* Tweak - Removed plugin recommendation
+
+= 5.0.24 =
+* Tweak - Typos 
+* Tweak - Remove Install Plugins menu when dismissed
+
+= 5.0.23 =
+* Tweak - Typos 
+
+= 5.0.22 =
+* Fixed - Bug with old php versions
+
+= 5.0.21 =
+* Added - Themes, Stock Images, Subscribers and Addons Previews
+
+= 5.0.20 =
+* Tweak - Autoclear popular caches.
+
+= 5.0.19 =
+* fixed z-index issue with supersize loader and focus link color
+
 = 5.0.18 =
 * fixed ios issue and no cache header issue
 
@@ -206,6 +236,37 @@ This is always a caching issue. Go to the caching plugin's setting page and clea
 * Initial Commit
 
 == Upgrade Notice ==
+= 5.1.0 =
+* Added - Suggest a Feature 
+* Added - Quicklinks to Support
+* Added - RafflePress support and recommendation
+
+= 5.0.26 =
+* Added - Giveaway Link to Submenu
+
+= 5.0.25 =
+* Fixed - Documentation Link
+* Tweak - Removed plugin recommendation
+
+= 5.0.24 =
+* Tweak - Typos 
+* Tweak - Remove Install Plugins menu when dismissed
+
+= 5.0.23 =
+* Tweak - Typos 
+
+= 5.0.22 =
+* Fixed - Bug with old php versions
+
+= 5.0.21 =
+* Added - Themes, Stock Images, Subscribers and Addons Previews
+
+= 5.0.20 =
+* Tweak - Autoclear popular caches.
+
+= 5.0.19 =
+* fixed z-index issue with supersize loader and focus link color
+
 = 5.0.18 =
 * fixed ios issue and no cache header issue
 
