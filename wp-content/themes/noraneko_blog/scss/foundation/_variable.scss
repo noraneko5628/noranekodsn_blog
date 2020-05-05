@@ -1,0 +1,28 @@
+//変数
+
+//画面サイズ
+$wide_pc_width: 1110px;
+$pc_width: 980px;
+$tablet_width: 768px;
+$sp_width: 640px;
+
+//カラー
+$accent_color: #f00; //////将来消す
+$accent_color1: #0E173C;
+$accent_color2: #FBC527;
+
+$dark_gray: #C6C6C6;
+$light_gray: #F0F0F0;
+
+$font_color: #333;
+
+//rootの文字サイズ（px）
+$font_size: 16;
+
+//フォントファミリー
+$gothic : 'YuGothic', YuGothic, Meiryo, sans-serif;
+$mincho : "Yu Mincho", "YuMincho", '游明朝', serif;
+
+//ファイルまでのパス
+$img_path: '../images/';
+$font_path: '../fonts/';

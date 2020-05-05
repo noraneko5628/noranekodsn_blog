@@ -1,0 +1,52 @@
+//media query用の変数・mixin
+
+// usage
+// .hoge{
+//   @include mq(xl) { // 引数を省略（初期値はmdの768px）
+//     color: yellow;
+//   }
+// }
+
+// min-width
+$breakpoint-up: (
+	'sm': 'screen and (min-width: #{$sp_width})',
+	'md': 'screen and (min-width: #{$tablet_width})',
+	'lg': 'screen and (min-width: #{$pc_width})',
+	'xl': 'screen and (min-width: #{$wide_pc_width})',
+) !default;
+
+// max-width
+$breakpoint-down: (
+	'sm': 'screen and (max-width: #{($sp_width - 1)})',
+	'md': 'screen and (max-width: #{($tablet_width - 1)})',
+	'lg': 'screen and (max-width: #{($pc_width - 1)})',
+	'xl': 'screen and (max-width: #{($wide_pc_width - 1)})',
+) !default;
+
+// max-width & min-width
+$breakpoint-between: (
+	'sm_md': 'screen and (min-width: #{$sp_width}) and (max-width: #{($tablet_width - 1)})',
+	'sm_lg': 'screen and (min-width: #{$sp_width}) and (max-width: #{($pc_width - 1)})',
+	'sm_xl': 'screen and (min-width: #{$sp_width}) and (max-width: #{($wide_pc_width - 1)})',
+	'md_lg': 'screen and (min-width: #{$tablet_width}) and (max-width: #{($pc_width - 1)})',
+	'md_xl': 'screen and (min-width: #{$tablet_width}) and (max-width: #{($wide_pc_width - 1)})',
+	'lg_xl': 'screen and (min-width: #{$pc_width}) and (max-width: #{($wide_pc_width - 1)})',
+) !default;
+
+
+// @mixinの定義
+@mixin mq-up($breakpoint: md) {
+	@media #{map-get($breakpoint-up, $breakpoint)} {
+		@content;
+	}
+}
+@mixin mq-down($breakpoint: md) {
+	@media #{map-get($breakpoint-down, $breakpoint)} {
+		@content;
+	}
+}
+@mixin mq-between($breakpoint: sm_md) {
+	@media #{map-get($breakpoint-between, $breakpoint)} {
+		@content;
+	}
+}
