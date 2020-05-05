@@ -198,3 +198,14 @@ function noraneko_blog_scripts() {
 	wp_enqueue_script( 'script', get_template_directory_uri() . '/js/script.js', array( 'jquery' ), false, true );
 }
 add_action( 'wp_enqueue_scripts', 'noraneko_blog_scripts' );
+
+/**
+ * Customize label for default post type.
+ */
+function noraneko_blog_custom_post_object_label( $labels ) {
+	foreach( $labels as $key => $value ) {
+		$labels->$key = str_replace( '投稿', 'Web / デザイン記事', $value );
+	}
+	return $labels;
+}
+add_filter( 'post_type_labels_post', 'noraneko_blog_custom_post_object_label' );
