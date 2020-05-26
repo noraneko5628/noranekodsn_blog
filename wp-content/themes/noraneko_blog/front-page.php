@@ -91,6 +91,7 @@ get_header(); ?>
 					endwhile;
 					?>
 				</ul>
+				<button class="button button-more">もっと見る</button>
 			</div>
 		</section>
 		<?php
@@ -142,6 +143,7 @@ get_header(); ?>
 					</li>
 					<?php endforeach; ?>
 				</ul>
+				<button class="button button-more">もっと見る</button>
 			</div>
 		</section>
 		<?php
