@@ -50,46 +50,102 @@ get_header(); ?>
 	</section>
 
 	<?php
-	if (have_posts()) :
+	if ( have_posts() ) :
 	?>
 		<section class="main-blog">
 			<div class="main-blog__inner">
 				<h2 class="main-blog__head">
 					Web / デザイン記事
 				</h2>
-				<div class="main-blog__article-list">
-					<ul class="main-blog__article-list__wrapper">
-						<?php while (have_posts()) : the_post(); ?>
-							<li class="main-blog__article-list__item">
-								<a href="<?php the_permalink(); ?>" class="main-blog__article-list__item__inner">
-									<figure class="main-blog__article-list__thumbnail">
-									</figure>
-									<div class="main-blog__article-list__content">
-										<h3 class="main-blog__article-list__content__title">
-											<?php the_title(); ?>
-										</h3>
-										<p class="main-blog__article-list__content__description">
-											<?php the_excerpt(); ?>
+				<ul class="main-blog__article-list">
+					<?php while ( have_posts() ) : the_post(); ?>
+						<li class="main-blog__article-list__item">
+							<a href="<?php the_permalink(); ?>" class="main-blog__article-list__item__inner">
+								<figure class="main-blog__article-list__thumbnail">
+									<?php if ( has_post_thumbnail() ) {
+										the_post_thumbnail();
+									} else {
+										echo '<img src="https://dummyimage.com/600x400/d3d3d3/fff">';
+									}
+									?>
+								</figure>
+								<div class="main-blog__article-list__content">
+									<h3 class="main-blog__article-list__content__title">
+										<?php the_title(); ?>
+									</h3>
+									<p class="main-blog__article-list__content__description">
+										<?php the_excerpt(); ?>
+									</p>
+									<div class="main-blog__article-list__content__info">
+										<p class="main-blog__article-list__content__date">
+											<time datetime="<?php the_time('F jS, Y'); ?>">
+												<?php the_time('F jS, Y'); ?>
+											</time>
 										</p>
-										<div class="main-blog__article-list__content__info">
-											<p class="main-blog__article-list__content__date">
-												<time datetime="<?php the_time('F jS, Y'); ?>">
-													<?php the_time('F jS, Y'); ?>
-												</time>
-											</p>
-											<p class="main-blog__article-list__content__tag"><span></span><span></span></p>
-										</div>
+										<p class="main-blog__article-list__content__tag"><span></span><span></span></p>
 									</div>
-								</a>
-							</li>
+								</div>
+							</a>
+						</li>
 						<?php
-						endwhile;
-						?>
-					</ul>
-				</div>
+					endwhile;
+					?>
+				</ul>
 			</div>
 		</section>
+		<?php
+	endif;
+	?>
 	<?php
+	$args     = array(
+		'post_type'      => 'noraneko_tweet',
+		'posts_par_page' => 4,
+	);
+	$my_posts = get_posts( $args );
+	if ( $my_posts ) :
+		?>
+		<section class="sub-blog">
+			<div class="sub-blog__inner">
+				<h2 class="sub-blog__head">
+					のらねこのつぶやき
+				</h2>
+				<ul class="sub-blog__article-list">
+					<?php
+					foreach ( $my_posts as $post ) :
+						setup_postdata( $post );
+						?>
+					<li class="sub-blog__article-list__item">
+						<a href="<?php the_permalink(); ?>" class="sub-blog__article-list__inner">
+							<figure class="sub-blog__article-list__thumbnail">
+									<?php if ( has_post_thumbnail() ) {
+										the_post_thumbnail();
+									} else {
+										echo '<img src="https://dummyimage.com/600x400/d3d3d3/fff">';
+									}
+									?>
+							</figure>
+							<div class="sub-blog__article-list__content">
+								<p class="sub-blog__article-list__content__date">
+									<time datetime="<?php the_time( 'F jS, Y' ); ?> ">
+										<?php
+										the_time( 'F jS, Y' );
+										?>
+									</time>
+								</p>
+								<h3 class="sub-blog__article-list__content__title">
+									<?php the_title(); ?>
+								</h3>
+								<div class="sub-blog__article-list__content__info">
+								</div>
+							</div>
+						</a>
+					</li>
+					<?php endforeach; ?>
+				</ul>
+			</div>
+		</section>
+		<?php
+		wp_reset_postdata();
 	endif;
 	?>
 </main>
